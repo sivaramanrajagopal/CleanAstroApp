@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dasha Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+        }
+        .btn-custom {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 600;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .result-section {
+            display: none;
+        }
+        .dasha-table th, .dasha-table td {
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <i class="fas fa-star"></i> Vedic Astrology Dashboard
+                </a>
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/chart">Birth Chart</a>
+                    <a class="nav-link active" href="/dasha">Dasha</a>
+                    <a class="nav-link" href="/transits">Transits</a>
+                    <a class="nav-link" href="/compatibility">Compatibility</a>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <!-- Input Form -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-user"></i> Birth Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="dashaForm">
+                            <div class="mb-3">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="birthDate" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Time of Birth</label>
+                                <input type="time" class="form-control" id="birthTime" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Latitude</label>
+                                <input type="number" step="0.000001" class="form-control" id="latitude" placeholder="e.g., 13.083333" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Longitude</label>
+                                <input type="number" step="0.000001" class="form-control" id="longitude" placeholder="e.g., 80.283333" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Timezone Offset</label>
+                                <input type="number" step="0.5" class="form-control" id="timezone" placeholder="e.g., 5.5 for IST" required>
+                            </div>
+                            <button type="submit" class="btn btn-custom w-100 mb-2">
+                                <i class="fas fa-clock"></i> Get Dasha
+                            </button>
+                            <button type="button" class="btn btn-secondary w-100" id="clearCacheBtn">
+                                <i class="fas fa-eraser"></i> Clear Details
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Results -->
+            <div class="col-lg-8">
+                <!-- Loading -->
+                <div class="loading" id="loading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3">Calculating Vimshottari Dasha...</p>
+                </div>
+                <!-- Results Section -->
+                <div class="result-section" id="results">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5><i class="fas fa-calendar-alt"></i> Vimshottari Dasha Periods</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="dashaSummary"></div>
+                            <div class="table-responsive">
+                                <table class="table table-striped dasha-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Mahadasha Lord</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Years</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="mahadashaTable"></tbody>
+                                </table>
+                            </div>
+                            <div class="mt-4">
+                                <h6>Current Mahadasha &rarr; Antardasha</h6>
+                                <div id="currentDasha"></div>
+                            </div>
+                            <div class="mt-4" id="antardashaSection" style="display:none;">
+                                <h6>Bhuktis (Antardashas) in Current Mahadasha</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-striped dasha-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Antardasha Lord</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Years</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="antardashaTable"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Prefill form from localStorage if available
+        window.addEventListener('DOMContentLoaded', function() {
+            const fields = ['birthDate', 'birthTime', 'latitude', 'longitude', 'timezone'];
+            fields.forEach(f => {
+                if (localStorage.getItem(f)) {
+                    document.getElementById(f).value = localStorage.getItem(f);
+                }
+            });
+        });
+        // Clear Details button
+        document.getElementById('clearCacheBtn').addEventListener('click', function() {
+            const fields = ['birthDate', 'birthTime', 'latitude', 'longitude', 'timezone'];
+            fields.forEach(f => localStorage.removeItem(f));
+            document.getElementById('dashaForm').reset();
+        });
+        document.getElementById('dashaForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            // Save to localStorage
+            localStorage.setItem('birthDate', document.getElementById('birthDate').value);
+            localStorage.setItem('birthTime', document.getElementById('birthTime').value);
+            localStorage.setItem('latitude', document.getElementById('latitude').value);
+            localStorage.setItem('longitude', document.getElementById('longitude').value);
+            localStorage.setItem('timezone', document.getElementById('timezone').value);
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            // Get form data
+            const formData = {
+                date: document.getElementById('birthDate').value,
+                time: document.getElementById('birthTime').value,
+                latitude: document.getElementById('latitude').value,
+                longitude: document.getElementById('longitude').value,
+                timezone: document.getElementById('timezone').value
+            };
+            try {
+                const response = await fetch('/api/calculate_chart', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.json();
+                if (data.success) {
+                    displayDasha(data.dasha);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error calculating dasha: ' + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+            }
+        });
+        function displayDasha(dasha) {
+            // Summary
+            document.getElementById('dashaSummary').innerHTML =
+                `<b>Birth Nakshatra:</b> ${dasha.birth_nakshatra.nakshatra} (${dasha.birth_nakshatra.lord})`;
+            // Mahadasha Table
+            const table = document.getElementById('mahadashaTable');
+            table.innerHTML = '';
+            dasha.mahadasha_periods.forEach(period => {
+                table.innerHTML += `<tr>
+                    <td>${period.dasha}</td>
+                    <td>${period.start_date}</td>
+                    <td>${period.end_date}</td>
+                    <td>${period.years}</td>
+                </tr>`;
+            });
+            // Current Mahadasha & Antardasha
+            let current = '';
+            if (dasha.current_mahadasha) {
+                current += `<b>Mahadasha:</b> ${dasha.current_mahadasha.dasha} (${dasha.current_mahadasha.start_date} to ${dasha.current_mahadasha.end_date})<br>`;
+            }
+            if (dasha.current_antardasha) {
+                current += `<b>Antardasha (Bhukti):</b> ${dasha.current_antardasha.dasha} (${dasha.current_antardasha.start_date} to ${dasha.current_antardasha.end_date})`;
+            } else {
+                current += `<span class='text-muted'>No Antardasha (Bhukti) found for this date.</span>`;
+            }
+            document.getElementById('currentDasha').innerHTML = current;
+            // Antardasha (Bhukti) Table
+            const antardashaSection = document.getElementById('antardashaSection');
+            const antardashaTable = document.getElementById('antardashaTable');
+            antardashaTable.innerHTML = '';
+            if (dasha.current_antardasha_list && dasha.current_antardasha_list.length > 0) {
+                antardashaSection.style.display = 'block';
+                dasha.current_antardasha_list.forEach(period => {
+                    antardashaTable.innerHTML += `<tr>
+                        <td>${period.dasha}</td>
+                        <td>${period.start_date}</td>
+                        <td>${period.end_date}</td>
+                        <td>${period.years}</td>
+                    </tr>`;
+                });
+            } else {
+                antardashaSection.style.display = 'block';
+                antardashaTable.innerHTML = '<tr><td colspan="4" class="text-muted">No Bhukti (Antardasha) periods found.</td></tr>';
+            }
+            // Debug: Show all Antardasha periods as JSON
+            let debugDiv = document.getElementById('antardashaDebug');
+            if (!debugDiv) {
+                debugDiv = document.createElement('div');
+                debugDiv.id = 'antardashaDebug';
+                antardashaSection.appendChild(debugDiv);
+            }
+            debugDiv.innerHTML = `<pre style='font-size:0.8em;background:#f8f9fa;border:1px solid #ccc;padding:8px;'>Debug Bhukti List:\n${JSON.stringify(dasha.current_antardasha_list, null, 2)}</pre>`;
+        }
+    </script>
+</body>
+</html> 

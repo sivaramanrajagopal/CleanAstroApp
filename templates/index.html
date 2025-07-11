@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedic Astrology Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+        }
+        .hero-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        .btn-custom {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white;
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-5">
+        <!-- Hero Section -->
+        <div class="hero-section text-center text-white">
+            <h1 class="display-4 mb-4">
+                <i class="fas fa-star"></i> Vedic Astrology Dashboard
+            </h1>
+            <p class="lead mb-4">Complete Vedic Astrology Engine with Advanced Calculations</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <a href="/chart" class="btn btn-custom w-100">
+                                <i class="fas fa-chart-line"></i> Birth Chart
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/dasha" class="btn btn-custom w-100">
+                                <i class="fas fa-clock"></i> Dasha Analysis
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/transits" class="btn btn-custom w-100">
+                                <i class="fas fa-satellite"></i> Transits
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/compatibility" class="btn btn-custom w-100">
+                                <i class="fas fa-heart"></i> Compatibility
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h5 class="card-title">Birth Chart Analysis</h5>
+                        <p class="card-text">Complete planetary positions, house analysis, and yoga detection based on Parashara principles.</p>
+                        <a href="/chart" class="btn btn-outline-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h5 class="card-title">Dasha Calculator</h5>
+                        <p class="card-text">Vimshottari dasha with antardasha calculations for timing of events.</p>
+                        <a href="/dasha" class="btn btn-outline-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-satellite-dish"></i>
+                        </div>
+                        <h5 class="card-title">Transit Analysis</h5>
+                        <p class="card-text">Current planetary transits and their effects on your birth chart.</p>
+                        <a href="/transits" class="btn btn-outline-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h5 class="card-title">Compatibility</h5>
+                        <p class="card-text">Relationship compatibility analysis including Mangal Dosha and Nakshatra matching.</p>
+                        <a href="/compatibility" class="btn btn-outline-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Features -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <h4 class="text-center mb-4">
+                            <i class="fas fa-cogs"></i> Technical Features
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success"></i> Complete Shadbala Calculations</li>
+                                    <li><i class="fas fa-check text-success"></i> Vedic Aspects (Drishti)</li>
+                                    <li><i class="fas fa-check text-success"></i> House Strength Analysis</li>
+                                    <li><i class="fas fa-check text-success"></i> Yoga Detection</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success"></i> Nakshatra Analysis</li>
+                                    <li><i class="fas fa-check text-success"></i> Planetary Dignity</li>
+                                    <li><i class="fas fa-check text-success"></i> Retrograde Detection</li>
+                                    <li><i class="fas fa-check text-success"></i> JSON API Ready</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

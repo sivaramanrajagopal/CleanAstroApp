@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadbala Analysis - Vedic Astrology Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+        }
+        .btn-custom {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 600;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .result-section {
+            display: none;
+        }
+        
+        /* Shadbala Specific Styles */
+        .shadbala-principle {
+            border-left: 4px solid #ddd;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .shadbala-principle:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .principle-strong {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        }
+        
+        .principle-moderate {
+            border-left-color: #ffc107;
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        }
+        
+        .principle-weak {
+            border-left-color: #dc3545;
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        }
+        
+        .tick-mark {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .tick-strong {
+            color: #28a745;
+        }
+        
+        .tick-weak {
+            color: #dc3545;
+        }
+        
+        .planet-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .planet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .planet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .planet-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .planet-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .overall-score {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .score-strong {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        
+        .score-moderate {
+            background: linear-gradient(45deg, #ffc107, #fd7e14);
+        }
+        
+        .score-weak {
+            background: linear-gradient(45deg, #dc3545, #e83e8c);
+        }
+        
+        .principle-details {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(255,255,255,0.7);
+            border-radius: 5px;
+        }
+        
+        .principle-value {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <i class="fas fa-star"></i> Vedic Astrology Dashboard
+                </a>
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/chart">Birth Chart</a>
+                    <a class="nav-link" href="/dasha">Dasha</a>
+                    <a class="nav-link" href="/transits">Transits</a>
+                    <a class="nav-link" href="/compatibility">Compatibility</a>
+                    <a class="nav-link active" href="/shadbala">Shadbala</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <!-- Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h2><i class="fas fa-balance-scale"></i> Shadbala Analysis</h2>
+                            <p class="text-muted">Six-fold strength analysis of planets using Vedic principles</p>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <div class="stat-card">
+                                        <div class="stat-number" id="strongPlanets">0</div>
+                                        <div class="stat-label">Strong Planets</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="stat-card">
+                                        <div class="stat-number" id="moderatePlanets">0</div>
+                                        <div class="stat-label">Moderate Planets</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="stat-card">
+                                        <div class="stat-number" id="weakPlanets">0</div>
+                                        <div class="stat-label">Weak Planets</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="stat-card">
+                                        <div class="stat-number" id="avgScore">0</div>
+                                        <div class="stat-label">Avg Score</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Birth Details Form -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-user"></i> Birth Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="shadbalaForm">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="birthDate" class="form-label">Birth Date</label>
+                                        <input type="date" class="form-control" id="birthDate" required>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="birthTime" class="form-label">Birth Time</label>
+                                        <input type="time" class="form-control" id="birthTime" required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="latitude" class="form-label">Latitude</label>
+                                        <input type="number" step="0.000001" class="form-control" id="latitude" placeholder="13.0833" required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="longitude" class="form-label">Longitude</label>
+                                        <input type="number" step="0.000001" class="form-control" id="longitude" placeholder="80.2833" required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="timezone" class="form-label">Timezone</label>
+                                        <input type="number" step="0.25" class="form-control" id="timezone" placeholder="5.5" required>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-custom">
+                                            <i class="fas fa-calculator"></i> Calculate Shadbala
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary ms-2" id="clearCacheBtn">
+                                            <i class="fas fa-trash"></i> Clear Cache
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div id="loading" class="loading">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Calculating Shadbala analysis...</p>
+            </div>
+
+            <!-- Results -->
+            <div id="results" class="result-section">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-chart-bar"></i> Shadbala Analysis Results</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="shadbalaResults">
+                                    <!-- Results will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Prefill form from localStorage if available
+        window.addEventListener('DOMContentLoaded', function() {
+            const fields = ['birthDate', 'birthTime', 'latitude', 'longitude', 'timezone'];
+            fields.forEach(f => {
+                if (localStorage.getItem(f)) {
+                    document.getElementById(f).value = localStorage.getItem(f);
+                }
+            });
+        });
+
+        document.getElementById('shadbalaForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Save to localStorage
+            localStorage.setItem('birthDate', document.getElementById('birthDate').value);
+            localStorage.setItem('birthTime', document.getElementById('birthTime').value);
+            localStorage.setItem('latitude', document.getElementById('latitude').value);
+            localStorage.setItem('longitude', document.getElementById('longitude').value);
+            localStorage.setItem('timezone', document.getElementById('timezone').value);
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            
+            // Get form data
+            const formData = {
+                date: document.getElementById('birthDate').value,
+                time: document.getElementById('birthTime').value,
+                latitude: document.getElementById('latitude').value,
+                longitude: document.getElementById('longitude').value,
+                timezone: document.getElementById('timezone').value
+            };
+            
+            try {
+                const response = await fetch('/api/calculate_shadbala', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayShadbalaResults(data.shadbala);
+                    updateSummaryStats(data.shadbala);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error calculating Shadbala: ' + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+            }
+        });
+
+        function displayShadbalaResults(shadbala) {
+            const resultsDiv = document.getElementById('shadbalaResults');
+            resultsDiv.innerHTML = '';
+            
+            Object.entries(shadbala).forEach(([planetName, analysis]) => {
+                const planetCard = createPlanetCard(planetName, analysis);
+                resultsDiv.appendChild(planetCard);
+            });
+        }
+
+        function createPlanetCard(planetName, analysis) {
+            const card = document.createElement('div');
+            card.className = 'planet-card';
+            
+            const overallClass = getStrengthClass(analysis.overall_assessment.score / 10);
+            
+            card.innerHTML = `
+                <div class="planet-header">
+                    <div>
+                        <div class="planet-name">${planetName}</div>
+                        <div class="planet-details">
+                            ${analysis.sign} • House ${analysis.house} • ${analysis.dignity}
+                            ${analysis.retrograde ? ' • Retrograde' : ''}
+                        </div>
+                    </div>
+                    <div class="overall-score score-${overallClass}">
+                        ${analysis.overall_assessment.score}/10
+                        <br><small>${analysis.overall_assessment.grade}</small>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-map-marker-alt"></i> Sthana Bala (Positional)</h6>
+                        <div class="shadbala-principle principle-${getPrincipleClass(analysis.components.sthana_bala.value)}">
+                            <span class="tick-mark ${analysis.components.sthana_bala.tick === '✓' ? 'tick-strong' : 'tick-weak'}">
+                                ${analysis.components.sthana_bala.tick}
+                            </span>
+                            <span class="principle-value">${analysis.components.sthana_bala.value}</span>
+                            <div class="principle-details">
+                                ${analysis.components.sthana_bala.description}
+                                <br><strong>Details:</strong> ${analysis.components.sthana_bala.details.dignity} • ${analysis.components.sthana_bala.details.house_bonus}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-compass"></i> Dig Bala (Directional)</h6>
+                        <div class="shadbala-principle principle-${getPrincipleClass(analysis.components.dig_bala.value)}">
+                            <span class="tick-mark ${analysis.components.dig_bala.tick === '✓' ? 'tick-strong' : 'tick-weak'}">
+                                ${analysis.components.dig_bala.tick}
+                            </span>
+                            <span class="principle-value">${analysis.components.dig_bala.value}</span>
+                            <div class="principle-details">
+                                ${analysis.components.dig_bala.description}
+                                <br><strong>Details:</strong> ${analysis.components.dig_bala.details.direction} • ${analysis.components.dig_bala.details.strength}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-clock"></i> Kala Bala (Temporal)</h6>
+                        <div class="shadbala-principle principle-${getPrincipleClass(analysis.components.kala_bala.value)}">
+                            <span class="tick-mark ${analysis.components.kala_bala.tick === '✓' ? 'tick-strong' : 'tick-weak'}">
+                                ${analysis.components.kala_bala.tick}
+                            </span>
+                            <span class="principle-value">${analysis.components.kala_bala.value}</span>
+                            <div class="principle-details">
+                                ${analysis.components.kala_bala.description}
+                                <br><strong>Details:</strong> Nathonnata: ${analysis.components.kala_bala.details.nathonnata}, Abda: ${analysis.components.kala_bala.details.abda}, Masa: ${analysis.components.kala_bala.details.masa}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-running"></i> Cheshta Bala (Motional)</h6>
+                        <div class="shadbala-principle principle-${getPrincipleClass(analysis.components.cheshta_bala.value)}">
+                            <span class="tick-mark ${analysis.components.cheshta_bala.tick === '✓' ? 'tick-strong' : 'tick-weak'}">
+                                ${analysis.components.cheshta_bala.tick}
+                            </span>
+                            <span class="principle-value">${analysis.components.cheshta_bala.value}</span>
+                            <div class="principle-details">
+                                ${analysis.components.cheshta_bala.description}
+                                <br><strong>Details:</strong> ${analysis.components.cheshta_bala.details.motion} • ${analysis.components.cheshta_bala.details.strength}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-seedling"></i> Naisargika Bala (Natural)</h6>
+                        <div class="shadbala-principle principle-${getPrincipleClass(analysis.components.naisargika_bala.value)}">
+                            <span class="tick-mark ${analysis.components.naisargika_bala.tick === '✓' ? 'tick-strong' : 'tick-weak'}">
+                                ${analysis.components.naisargika_bala.tick}
+                            </span>
+                            <span class="principle-value">${analysis.components.naisargika_bala.value}</span>
+                            <div class="principle-details">
+                                ${analysis.components.naisargika_bala.description}
+                                <br><strong>Details:</strong> ${analysis.components.naisargika_bala.details.natural_strength} • ${analysis.components.naisargika_bala.details.planet_type}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-eye"></i> Drik Bala (Aspectual)</h6>
+                        <div class="shadbala-principle principle-${getPrincipleClass(analysis.components.drik_bala.value)}">
+                            <span class="tick-mark ${analysis.components.drik_bala.tick === '✓' ? 'tick-strong' : 'tick-weak'}">
+                                ${analysis.components.drik_bala.tick}
+                            </span>
+                            <span class="principle-value">${analysis.components.drik_bala.value}</span>
+                            <div class="principle-details">
+                                ${analysis.components.drik_bala.description}
+                                <br><strong>Details:</strong> ${analysis.components.drik_bala.details.house_type} • ${analysis.components.drik_bala.details.aspect_strength}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function getPrincipleClass(value) {
+            if (value >= 0.7) return 'strong';
+            if (value >= 0.5) return 'moderate';
+            return 'weak';
+        }
+
+        function getStrengthClass(strength) {
+            if (strength >= 7) return 'strong';
+            if (strength >= 4) return 'moderate';
+            return 'weak';
+        }
+
+        function updateSummaryStats(shadbala) {
+            let strong = 0, moderate = 0, weak = 0;
+            let totalScore = 0;
+            let planetCount = 0;
+            
+            Object.values(shadbala).forEach(analysis => {
+                const score = analysis.overall_assessment.score;
+                totalScore += score;
+                planetCount++;
+                
+                if (score >= 7) strong++;
+                else if (score >= 4) moderate++;
+                else weak++;
+            });
+            
+            document.getElementById('strongPlanets').textContent = strong;
+            document.getElementById('moderatePlanets').textContent = moderate;
+            document.getElementById('weakPlanets').textContent = weak;
+            document.getElementById('avgScore').textContent = (totalScore / planetCount).toFixed(1);
+        }
+
+        // Clear Details button
+        document.getElementById('clearCacheBtn').addEventListener('click', function() {
+            const fields = ['birthDate', 'birthTime', 'latitude', 'longitude', 'timezone'];
+            fields.forEach(f => localStorage.removeItem(f));
+            document.getElementById('shadbalaForm').reset();
+        });
+    </script>
+
+    <!-- Calculation Details Section -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="fas fa-calculator"></i> Calculation Methodology & Transparency</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-primary">Shadbala Components (Parashara Principles)</h5>
+                        <div class="accordion" id="calculationAccordion">
+                            
+                            <!-- Sthana Bala -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="sthanaHeader">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#sthanaCollapse">
+                                        <strong>Sthana Bala (Positional Strength)</strong>
+                                    </button>
+                                </h2>
+                                <div id="sthanaCollapse" class="accordion-collapse collapse show" data-bs-parent="#calculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Exalted (Uccha):</strong> 1.0 (100% strength)</li>
+                                            <li><strong>Own Sign (Swa):</strong> 0.75 (75% strength)</li>
+                                            <li><strong>Neutral (Mooltrikona):</strong> 0.5 (50% strength)</li>
+                                            <li><strong>Debilitated (Neecha):</strong> 0.25 (25% strength)</li>
+                                            <li><strong>House Bonuses:</strong> Kendra (1.0), Trikona (0.75), Dusthana (0.5)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dig Bala -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="digHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#digCollapse">
+                                        <strong>Dig Bala (Directional Strength)</strong>
+                                    </button>
+                                </h2>
+                                <div id="digCollapse" class="accordion-collapse collapse" data-bs-parent="#calculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>East Direction:</strong> Sun, Jupiter (1.0)</li>
+                                            <li><strong>South Direction:</strong> Mars, Venus (1.0)</li>
+                                            <li><strong>West Direction:</strong> Saturn, Moon (1.0)</li>
+                                            <li><strong>North Direction:</strong> Mercury (1.0)</li>
+                                            <li><strong>Opposite Direction:</strong> 0.5 (50% strength)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Kala Bala -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="kalaHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kalaCollapse">
+                                        <strong>Kala Bala (Temporal Strength)</strong>
+                                    </button>
+                                </h2>
+                                <div id="kalaCollapse" class="accordion-collapse collapse" data-bs-parent="#calculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Day Planets:</strong> Sun, Jupiter (stronger in day)</li>
+                                            <li><strong>Night Planets:</strong> Moon, Venus (stronger at night)</li>
+                                            <li><strong>Neutral:</strong> Mercury, Mars, Saturn</li>
+                                            <li><strong>Seasonal Factors:</strong> Based on birth month</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cheshta Bala -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="cheshtaHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cheshtaCollapse">
+                                        <strong>Cheshta Bala (Motional Strength)</strong>
+                                    </button>
+                                </h2>
+                                <div id="cheshtaCollapse" class="accordion-collapse collapse" data-bs-parent="#calculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Retrograde Motion:</strong> 1.0 (100% strength)</li>
+                                            <li><strong>Direct Motion:</strong> 0.5 (50% strength)</li>
+                                            <li><strong>Stationary:</strong> 0.75 (75% strength)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Naisargika Bala -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="naisargikaHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#naisargikaCollapse">
+                                        <strong>Naisargika Bala (Natural Strength)</strong>
+                                    </button>
+                                </h2>
+                                <div id="naisargikaCollapse" class="accordion-collapse collapse" data-bs-parent="#calculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Saturn:</strong> 0.25 (25% - weakest)</li>
+                                            <li><strong>Mars:</strong> 0.375 (37.5%)</li>
+                                            <li><strong>Mercury:</strong> 0.5 (50%)</li>
+                                            <li><strong>Jupiter:</strong> 0.625 (62.5%)</li>
+                                            <li><strong>Venus:</strong> 0.75 (75%)</li>
+                                            <li><strong>Moon:</strong> 0.875 (87.5%)</li>
+                                            <li><strong>Sun:</strong> 1.0 (100% - strongest)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Drik Bala -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="drikHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#drikCollapse">
+                                        <strong>Drik Bala (Aspectual Strength)</strong>
+                                    </button>
+                                </h2>
+                                <div id="drikCollapse" class="accordion-collapse collapse" data-bs-parent="#calculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>7th House Aspect:</strong> 1.0 (100% strength)</li>
+                                            <li><strong>4th & 8th House Aspect:</strong> 0.75 (75% strength)</li>
+                                            <li><strong>5th & 9th House Aspect:</strong> 0.5 (50% strength)</li>
+                                            <li><strong>3rd & 10th House Aspect:</strong> 0.25 (25% strength)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5 class="text-primary">Strength Indicators</h5>
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-info-circle"></i> Understanding the Indicators</h6>
+                            <ul class="mb-0">
+                                <li><span class="badge bg-success">✓</span> <strong>Strong:</strong> Component ≥ 0.5 (50% or higher)</li>
+                                <li><span class="badge bg-warning">⚠</span> <strong>Moderate:</strong> Component 0.25-0.49 (25-49%)</li>
+                                <li><span class="badge bg-danger">✗</span> <strong>Weak:</strong> Component < 0.25 (below 25%)</li>
+                            </ul>
+                        </div>
+
+                        <h5 class="text-primary mt-4">Overall Strength Calculation</h5>
+                        <div class="alert alert-success">
+                            <h6><i class="fas fa-calculator"></i> Formula</h6>
+                            <p class="mb-2"><strong>Total Shadbala = (Sthana + Dig + Kala + Cheshta + Naisargika + Drik) / 6</strong></p>
+                            <p class="mb-0"><small>Each component is normalized to 0-1 scale, then averaged for final strength.</small></p>
+                        </div>
+
+                        <h5 class="text-primary mt-4">Traditional References</h5>
+                        <div class="alert alert-warning">
+                            <ul class="mb-0">
+                                <li><strong>Parashara Hora Shastra:</strong> Primary source for Shadbala calculations</li>
+                                <li><strong>Brihat Parashara Hora Shastra:</strong> Detailed methodology</li>
+                                <li><strong>Jaimini Sutras:</strong> Additional strength calculations</li>
+                                <li><strong>Varahamihira:</strong> Classical strength assessments</li>
+                            </ul>
+                        </div>
+
+                        <h5 class="text-primary mt-4">Calculation Transparency</h5>
+                        <div class="alert alert-light">
+                            <h6><i class="fas fa-eye"></i> Open Source Methodology</h6>
+                            <ul class="mb-0">
+                                <li>All calculations follow traditional Parashara principles</li>
+                                <li>No proprietary algorithms or hidden formulas</li>
+                                <li>Source code available for verification</li>
+                                <li>Results can be cross-verified with classical texts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

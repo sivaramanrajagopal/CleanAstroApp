@@ -197,10 +197,11 @@
                     <i class="fas fa-star"></i> Vedic Astrology Dashboard
                 </a>
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="/chart">Birth Chart</a>
+                    <a class="nav-link active" href="/chart">Birth Chart</a>
                     <a class="nav-link" href="/dasha">Dasha</a>
                     <a class="nav-link" href="/transits">Transits</a>
                     <a class="nav-link" href="/compatibility">Compatibility</a>
+                    <a class="nav-link" href="/shadbala">Shadbala</a>
                 </div>
             </div>
         </nav>
@@ -740,5 +741,212 @@
             return 'weak';
         }
     </script>
+
+    <!-- Chart Strength Calculation Details -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="fas fa-calculator"></i> Chart Strength Calculation Methodology</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-primary">Overall Health Score Formula</h5>
+                        <div class="alert alert-success">
+                            <h6><i class="fas fa-heartbeat"></i> Health Score = (Planet Score + House Score + Yoga Score) / 100</h6>
+                            <ul class="mb-0">
+                                <li><strong>Planet Strength (40%):</strong> Average of all planet strengths</li>
+                                <li><strong>House Strength (40%):</strong> Average of all house strengths</li>
+                                <li><strong>Yoga Count (20%):</strong> Number of auspicious yogas detected</li>
+                            </ul>
+                        </div>
+
+                        <h5 class="text-primary mt-4">Planet Strength Calculation</h5>
+                        <div class="accordion" id="planetCalculationAccordion">
+                            
+                            <!-- Dignity -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="dignityHeader">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dignityCollapse">
+                                        <strong>Dignity Assessment (30% weight)</strong>
+                                    </button>
+                                </h2>
+                                <div id="dignityCollapse" class="accordion-collapse collapse show" data-bs-parent="#planetCalculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Exalted (Uccha):</strong> 10/10 (100% strength)</li>
+                                            <li><strong>Own Sign (Swa):</strong> 8/10 (80% strength)</li>
+                                            <li><strong>Mooltrikona:</strong> 7/10 (70% strength)</li>
+                                            <li><strong>Friendly (Mitra):</strong> 6/10 (60% strength)</li>
+                                            <li><strong>Neutral (Sama):</strong> 5/10 (50% strength)</li>
+                                            <li><strong>Enemy (Shatru):</strong> 4/10 (40% strength)</li>
+                                            <li><strong>Debilitated (Neecha):</strong> 2/10 (20% strength)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- House Position -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="housePositionHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#housePositionCollapse">
+                                        <strong>House Position (25% weight)</strong>
+                                    </button>
+                                </h2>
+                                <div id="housePositionCollapse" class="accordion-collapse collapse" data-bs-parent="#planetCalculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Kendra Houses (1,4,7,10):</strong> +2 points (strongest)</li>
+                                            <li><strong>Trikona Houses (1,5,9):</strong> +1.5 points</li>
+                                            <li><strong>Upachaya Houses (3,6,10,11):</strong> +1 point</li>
+                                            <li><strong>Dusthana Houses (6,8,12):</strong> -1 point (weakest)</li>
+                                            <li><strong>Neutral Houses (2,3,5,9,11):</strong> +0.5 points</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Motion -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="motionHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#motionCollapse">
+                                        <strong>Motion Status (20% weight)</strong>
+                                    </button>
+                                </h2>
+                                <div id="motionCollapse" class="accordion-collapse collapse" data-bs-parent="#planetCalculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Direct Motion:</strong> +1 point (normal strength)</li>
+                                            <li><strong>Retrograde Motion:</strong> +2 points (enhanced strength)</li>
+                                            <li><strong>Stationary:</strong> +1.5 points (moderate enhancement)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shadbala -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="shadbalaHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shadbalaCollapse">
+                                        <strong>Shadbala Integration (25% weight)</strong>
+                                    </button>
+                                </h2>
+                                <div id="shadbalaCollapse" class="accordion-collapse collapse" data-bs-parent="#planetCalculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Sthana Bala:</strong> Positional strength (0-1 scale)</li>
+                                            <li><strong>Dig Bala:</strong> Directional strength (0-1 scale)</li>
+                                            <li><strong>Kala Bala:</strong> Temporal strength (0-1 scale)</li>
+                                            <li><strong>Cheshta Bala:</strong> Motional strength (0-1 scale)</li>
+                                            <li><strong>Naisargika Bala:</strong> Natural strength (0-1 scale)</li>
+                                            <li><strong>Drik Bala:</strong> Aspectual strength (0-1 scale)</li>
+                                            <li><strong>Total:</strong> Average of all 6 components</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5 class="text-primary">House Strength Calculation</h5>
+                        <div class="accordion" id="houseCalculationAccordion">
+                            
+                            <!-- House Type -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="houseTypeHeader">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#houseTypeCollapse">
+                                        <strong>House Classification (40% weight)</strong>
+                                    </button>
+                                </h2>
+                                <div id="houseTypeCollapse" class="accordion-collapse collapse show" data-bs-parent="#houseCalculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Kendra Houses (1,4,7,10):</strong> 9/10 (90% strength)</li>
+                                            <li><strong>Trikona Houses (1,5,9):</strong> 8/10 (80% strength)</li>
+                                            <li><strong>Upachaya Houses (3,6,10,11):</strong> 7/10 (70% strength)</li>
+                                            <li><strong>Neutral Houses (2,3,5,9,11):</strong> 6/10 (60% strength)</li>
+                                            <li><strong>Dusthana Houses (6,8,12):</strong> 4/10 (40% strength)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Occupancy -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="occupancyHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#occupancyCollapse">
+                                        <strong>Planet Occupancy (30% weight)</strong>
+                                    </button>
+                                </h2>
+                                <div id="occupancyCollapse" class="accordion-collapse collapse" data-bs-parent="#houseCalculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Benefic Planets:</strong> +2 points per planet</li>
+                                            <li><strong>Malefic Planets:</strong> -1 point per planet</li>
+                                            <li><strong>Neutral Planets:</strong> +0.5 points per planet</li>
+                                            <li><strong>Empty House:</strong> 0 points (neutral)</li>
+                                            <li><strong>Multiple Planets:</strong> Cumulative effect</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Element -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="elementHeader">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#elementCollapse">
+                                        <strong>Element Strength (30% weight)</strong>
+                                    </button>
+                                </h2>
+                                <div id="elementCollapse" class="accordion-collapse collapse" data-bs-parent="#houseCalculationAccordion">
+                                    <div class="accordion-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Fire Signs (Aries, Leo, Sagittarius):</strong> 8/10 (80% strength)</li>
+                                            <li><strong>Earth Signs (Taurus, Virgo, Capricorn):</strong> 7/10 (70% strength)</li>
+                                            <li><strong>Air Signs (Gemini, Libra, Aquarius):</strong> 6/10 (60% strength)</li>
+                                            <li><strong>Water Signs (Cancer, Scorpio, Pisces):</strong> 7/10 (70% strength)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="text-primary mt-4">Strength Indicators</h5>
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-info-circle"></i> Understanding the Indicators</h6>
+                            <ul class="mb-0">
+                                <li><span class="badge bg-success">Strong:</span> Score ≥ 7.0 (70% or higher)</li>
+                                <li><span class="badge bg-warning">Moderate:</span> Score 4.0-6.9 (40-69%)</li>
+                                <li><span class="badge bg-danger">Weak:</span> Score < 4.0 (below 40%)</li>
+                            </ul>
+                        </div>
+
+                        <h5 class="text-primary mt-4">Yoga Contribution</h5>
+                        <div class="alert alert-warning">
+                            <h6><i class="fas fa-star"></i> Auspicious Yogas</h6>
+                            <ul class="mb-0">
+                                <li><strong>Each Yoga:</strong> +2 points to overall health score</li>
+                                <li><strong>Maximum Yoga Score:</strong> 20 points (10 yogas)</li>
+                                <li><strong>Common Yogas:</strong> Gajakesari, Budhaditya, etc.</li>
+                                <li><strong>Effect:</strong> Enhances overall chart strength</li>
+                            </ul>
+                        </div>
+
+                        <h5 class="text-primary mt-4">Calculation Transparency</h5>
+                        <div class="alert alert-light">
+                            <h6><i class="fas fa-eye"></i> Open Source Methodology</h6>
+                            <ul class="mb-0">
+                                <li>All calculations follow traditional Vedic principles</li>
+                                <li>Based on Parashara Hora Shastra methodology</li>
+                                <li>Source code available for verification</li>
+                                <li>Results can be cross-verified with classical texts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 

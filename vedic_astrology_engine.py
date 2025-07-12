@@ -112,47 +112,56 @@ def calculate_mahadasha_periods(birth_nakshatra: Dict, birth_date: datetime.date
     periods = []
     current_lord = birth_nakshatra['lord']
     remaining_years = VIMSHOTTARI_PERIODS[current_lord] * birth_nakshatra['remaining']
+    
+    # First period
+    end_date = birth_date + datetime.timedelta(days=int(remaining_years * 365.25))
     periods.append({
         'dasha': current_lord,
-        'start_date': birth_date,
-        'end_date': birth_date + datetime.timedelta(days=int(remaining_years * 365.25)),
+        'start_date': birth_date.strftime("%Y-%m-%d"),
+        'end_date': end_date.strftime("%Y-%m-%d"),
         'years': round(remaining_years, 2)
     })
+    
+    # Subsequent periods
     lords = list(VIMSHOTTARI_PERIODS.keys())
     current_index = lords.index(current_lord)
     for i in range(1, 9):
         next_index = (current_index + i) % 9
         next_lord = lords[next_index]
         period_years = VIMSHOTTARI_PERIODS[next_lord]
-        start_date = periods[-1]['end_date']
+        start_date = end_date  # Use the end_date from previous period
         end_date = start_date + datetime.timedelta(days=int(period_years * 365.25))
         periods.append({
             'dasha': next_lord,
-            'start_date': start_date,
-            'end_date': end_date,
+            'start_date': start_date.strftime("%Y-%m-%d"),
+            'end_date': end_date.strftime("%Y-%m-%d"),
             'years': period_years
         })
     return periods
 
 def get_current_mahadasha(mahadasha_periods: List[Dict], date: datetime.date) -> Optional[Dict]:
     for period in mahadasha_periods:
-        if period['start_date'] <= date <= period['end_date']:
+        start_dt = datetime.datetime.strptime(period['start_date'], "%Y-%m-%d").date()
+        end_dt = datetime.datetime.strptime(period['end_date'], "%Y-%m-%d").date()
+        if start_dt <= date <= end_dt:
             return period
     return None
 
 def calculate_antardasha_periods(mahadasha_lord: str, mahadasha_years: float, mahadasha_start: datetime.date) -> List[Dict]:
+    """Calculate Antardasha (Bhukti) periods within a Mahadasha"""
     periods = []
     lords = list(VIMSHOTTARI_PERIODS.keys())
     lord_index = lords.index(mahadasha_lord)
     start_date = mahadasha_start
+    
     for i in range(9):
         antardasha_lord = lords[(lord_index + i) % 9]
         antardasha_years = (VIMSHOTTARI_PERIODS[antardasha_lord] * mahadasha_years) / 120
         end_date = start_date + datetime.timedelta(days=int(antardasha_years * 365.25))
         periods.append({
             'dasha': antardasha_lord,
-            'start_date': start_date,
-            'end_date': end_date,
+            'start_date': start_date.strftime("%Y-%m-%d"),
+            'end_date': end_date.strftime("%Y-%m-%d"),
             'years': round(antardasha_years, 2)
         })
         start_date = end_date
@@ -160,27 +169,49 @@ def calculate_antardasha_periods(mahadasha_lord: str, mahadasha_years: float, ma
 
 # --- Main API for Flask ---
 def get_dasha_info(moon_longitude: float, birth_date: str, current_date: Optional[str] = None) -> Dict[str, Any]:
-    birth_dt = datetime.datetime.strptime(birth_date, "%Y-%m-%d").date()
-    if current_date:
-        current_dt = datetime.datetime.strptime(current_date, "%Y-%m-%d").date()
-    else:
-        current_dt = datetime.date.today()
-    birth_nakshatra = calculate_birth_nakshatra(moon_longitude)
-    mahadasha_periods = calculate_mahadasha_periods(birth_nakshatra, birth_dt)
-    current_mahadasha = get_current_mahadasha(mahadasha_periods, current_dt)
-    antardasha_periods = []
-    if current_mahadasha:
-        antardasha_periods = calculate_antardasha_periods(
-            current_mahadasha['dasha'],
-            current_mahadasha['years'],
-            current_mahadasha['start_date']
-        )
-    return {
-        'birth_nakshatra': birth_nakshatra,
-        'mahadasha_periods': mahadasha_periods,
-        'current_mahadasha': current_mahadasha,
-        'antardasha_periods': antardasha_periods
-    }
+    try:
+        birth_dt = datetime.datetime.strptime(birth_date, "%Y-%m-%d").date()
+        if current_date:
+            current_dt = datetime.datetime.strptime(current_date, "%Y-%m-%d").date()
+        else:
+            current_dt = datetime.date.today()
+        
+        birth_nakshatra = calculate_birth_nakshatra(moon_longitude)
+        mahadasha_periods = calculate_mahadasha_periods(birth_nakshatra, birth_dt)
+        current_mahadasha = get_current_mahadasha(mahadasha_periods, current_dt)
+        
+        # Calculate all antardasha periods for current mahadasha
+        antardasha_periods = []
+        current_antardasha = None
+        
+        if current_mahadasha:
+            # Convert start_date string back to date for antardasha calculation
+            mahadasha_start_dt = datetime.datetime.strptime(current_mahadasha['start_date'], "%Y-%m-%d").date()
+            antardasha_periods = calculate_antardasha_periods(
+                current_mahadasha['dasha'],
+                current_mahadasha['years'],
+                mahadasha_start_dt
+            )
+            
+            # Find current antardasha
+            for period in antardasha_periods:
+                start_dt = datetime.datetime.strptime(period['start_date'], "%Y-%m-%d").date()
+                end_dt = datetime.datetime.strptime(period['end_date'], "%Y-%m-%d").date()
+                if start_dt <= current_dt <= end_dt:
+                    current_antardasha = period
+                    break
+        
+        return {
+            'birth_nakshatra': birth_nakshatra,
+            'mahadasha_periods': mahadasha_periods,
+            'current_mahadasha': current_mahadasha,
+            'antardasha_periods': antardasha_periods,
+            'current_antardasha': current_antardasha,
+            'current_antardasha_list': antardasha_periods  # For compatibility with template
+        }
+    except Exception as e:
+        print(f"Error in get_dasha_info: {str(e)}")
+        raise
 
 # =============================================================================
 # STEP 3: Core Calculation Functions

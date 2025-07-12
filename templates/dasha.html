@@ -232,10 +232,14 @@
             const antardashaSection = document.getElementById('antardashaSection');
             const antardashaTable = document.getElementById('antardashaTable');
             antardashaTable.innerHTML = '';
-            if (dasha.current_antardasha_list && dasha.current_antardasha_list.length > 0) {
+            if (dasha.antardasha_periods && dasha.antardasha_periods.length > 0) {
                 antardashaSection.style.display = 'block';
-                dasha.current_antardasha_list.forEach(period => {
-                    antardashaTable.innerHTML += `<tr>
+                dasha.antardasha_periods.forEach(period => {
+                    const isCurrent = dasha.current_antardasha && 
+                                    period.dasha === dasha.current_antardasha.dasha &&
+                                    period.start_date === dasha.current_antardasha.start_date;
+                    const rowClass = isCurrent ? 'table-primary' : '';
+                    antardashaTable.innerHTML += `<tr class="${rowClass}">
                         <td>${period.dasha}</td>
                         <td>${period.start_date}</td>
                         <td>${period.end_date}</td>
@@ -246,14 +250,6 @@
                 antardashaSection.style.display = 'block';
                 antardashaTable.innerHTML = '<tr><td colspan="4" class="text-muted">No Bhukti (Antardasha) periods found.</td></tr>';
             }
-            // Debug: Show all Antardasha periods as JSON
-            let debugDiv = document.getElementById('antardashaDebug');
-            if (!debugDiv) {
-                debugDiv = document.createElement('div');
-                debugDiv.id = 'antardashaDebug';
-                antardashaSection.appendChild(debugDiv);
-            }
-            debugDiv.innerHTML = `<pre style='font-size:0.8em;background:#f8f9fa;border:1px solid #ccc;padding:8px;'>Debug Bhukti List:\n${JSON.stringify(dasha.current_antardasha_list, null, 2)}</pre>`;
         }
     </script>
 </body>

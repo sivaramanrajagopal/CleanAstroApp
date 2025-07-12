@@ -30,7 +30,11 @@
         .planet-strong { color: #28a745; font-weight: bold; }
         .planet-moderate { color: #ffc107; font-weight: bold; }
         .planet-weak { color: #dc3545; font-weight: bold; }
-        .yoga-detected { color: #28a745; }
+        .yoga-detected { 
+            color: white !important; 
+            background-color: #28a745 !important;
+            font-weight: bold;
+        }
         .loading {
             display: none;
             text-align: center;
@@ -38,6 +42,149 @@
         }
         .result-section {
             display: none;
+        }
+        
+        /* Strength Dashboard Styles */
+        .chart-health-score {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .score-number {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .strength-stats {
+            padding: 1rem;
+        }
+        
+        .stat-box {
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 0.5rem 0;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .stat-box.strong {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        
+        .stat-box.moderate {
+            background: linear-gradient(45deg, #ffc107, #fd7e14);
+        }
+        
+        .stat-box.weak {
+            background: linear-gradient(45deg, #dc3545, #e83e8c);
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        .planet-strength-grid, .house-strength-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .strength-indicator {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #ddd;
+            transition: all 0.3s ease;
+        }
+        
+        .strength-indicator:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .strength-indicator.strong {
+            border-left-color: #28a745;
+        }
+        
+        .strength-indicator.moderate {
+            border-left-color: #ffc107;
+        }
+        
+        .strength-indicator.weak {
+            border-left-color: #dc3545;
+        }
+        
+        .strength-bar {
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+        
+        .strength-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .strength-fill.strong {
+            background: linear-gradient(90deg, #28a745, #20c997);
+        }
+        
+        .strength-fill.moderate {
+            background: linear-gradient(90deg, #ffc107, #fd7e14);
+        }
+        
+        .strength-fill.weak {
+            background: linear-gradient(90deg, #dc3545, #e83e8c);
+        }
+        
+        .strength-score {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .strength-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .strength-details {
+            font-size: 0.8rem;
+            color: #888;
         }
     </style>
 </head>
@@ -129,6 +276,77 @@
                                     <p><strong>Total Yogas:</strong> <span id="totalYogas"></span></p>
                                     <p><strong>Retrograde Planets:</strong> <span id="retrogradePlanets"></span></p>
                                     <p><strong>Ayanamsa:</strong> <span id="ayanamsa"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Strength Dashboard -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5><i class="fas fa-tachometer-alt"></i> Strength Dashboard</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Overall Chart Health -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="text-center">
+                                        <h6>Overall Chart Health</h6>
+                                        <div class="chart-health-score" id="chartHealthScore">
+                                            <div class="score-circle">
+                                                <span class="score-number" id="healthScoreNumber">0</span>
+                                                <span class="score-label">/ 100</span>
+                                            </div>
+                                        </div>
+                                        <div class="health-status mt-2" id="healthStatus">
+                                            <span class="badge bg-secondary">Calculating...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="strength-stats">
+                                        <h6>Strength Distribution</h6>
+                                        <div class="row text-center">
+                                            <div class="col-4">
+                                                <div class="stat-box strong">
+                                                    <div class="stat-number" id="strongPlanets">0</div>
+                                                    <div class="stat-label">Strong</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="stat-box moderate">
+                                                    <div class="stat-number" id="moderatePlanets">0</div>
+                                                    <div class="stat-label">Moderate</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="stat-box weak">
+                                                    <div class="stat-number" id="weakPlanets">0</div>
+                                                    <div class="stat-label">Weak</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Planet Strength Indicators -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h6>Planet Strength Indicators</h6>
+                                    <div class="planet-strength-grid" id="planetStrengthGrid">
+                                        <!-- Planet strength indicators will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- House Strength Indicators -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6>House Strength Indicators</h6>
+                                    <div class="house-strength-grid" id="houseStrengthGrid">
+                                        <!-- House strength indicators will be populated here -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -311,6 +529,9 @@
                 .map(([name]) => name);
             document.getElementById('retrogradePlanets').textContent = retrograde.join(', ') || 'None';
             
+            // Update Strength Dashboard
+            updateStrengthDashboard(planets, houses, yogas);
+            
             // Planetary positions table
             const planetsTable = document.getElementById('planetsTable');
             planetsTable.innerHTML = '';
@@ -382,6 +603,142 @@
         tooltipTriggerList.forEach(function (tooltipTriggerEl) {
             new bootstrap.Tooltip(tooltipTriggerEl);
         });
+        
+        // Strength Dashboard Functions
+        function updateStrengthDashboard(planets, houses, yogas) {
+            // Calculate overall health score
+            const healthScore = calculateHealthScore(planets, houses, yogas);
+            updateHealthScore(healthScore);
+            
+            // Update strength distribution
+            updateStrengthDistribution(planets);
+            
+            // Update planet strength indicators
+            updatePlanetStrengthIndicators(planets);
+            
+            // Update house strength indicators
+            updateHouseStrengthIndicators(houses);
+        }
+        
+        function calculateHealthScore(planets, houses, yogas) {
+            let totalScore = 0;
+            let maxScore = 0;
+            
+            // Planet strength contribution (40% weight)
+            const planetScores = Object.values(planets).map(p => p.strength);
+            const avgPlanetStrength = planetScores.reduce((a, b) => a + b, 0) / planetScores.length;
+            const planetScore = Math.min(avgPlanetStrength / 10 * 40, 40); // Max 40 points
+            totalScore += planetScore;
+            maxScore += 40;
+            
+            // House strength contribution (40% weight)
+            const houseScores = Object.values(houses).map(h => h.strength);
+            const avgHouseStrength = houseScores.reduce((a, b) => a + b, 0) / houseScores.length;
+            const houseScore = Math.min(avgHouseStrength / 10 * 40, 40); // Max 40 points
+            totalScore += houseScore;
+            maxScore += 40;
+            
+            // Yogas contribution (20% weight)
+            const yogaScore = Math.min(yogas * 2, 20); // 1 yoga = 2 points, max 20
+            totalScore += yogaScore;
+            maxScore += 20;
+            
+            return Math.round((totalScore / maxScore) * 100);
+        }
+        
+        function updateHealthScore(score) {
+            document.getElementById('healthScoreNumber').textContent = score;
+            
+            const healthStatus = document.getElementById('healthStatus');
+            let statusClass = 'bg-secondary';
+            let statusText = 'Poor';
+            
+            if (score >= 80) {
+                statusClass = 'bg-success';
+                statusText = 'Excellent';
+            } else if (score >= 60) {
+                statusClass = 'bg-info';
+                statusText = 'Good';
+            } else if (score >= 40) {
+                statusClass = 'bg-warning';
+                statusText = 'Moderate';
+            } else if (score >= 20) {
+                statusClass = 'bg-danger';
+                statusText = 'Weak';
+            }
+            
+            healthStatus.innerHTML = `<span class="badge ${statusClass}">${statusText}</span>`;
+        }
+        
+        function updateStrengthDistribution(planets) {
+            let strong = 0, moderate = 0, weak = 0;
+            
+            Object.values(planets).forEach(planet => {
+                if (planet.strength >= 7) strong++;
+                else if (planet.strength >= 4) moderate++;
+                else weak++;
+            });
+            
+            document.getElementById('strongPlanets').textContent = strong;
+            document.getElementById('moderatePlanets').textContent = moderate;
+            document.getElementById('weakPlanets').textContent = weak;
+        }
+        
+        function updatePlanetStrengthIndicators(planets) {
+            const grid = document.getElementById('planetStrengthGrid');
+            grid.innerHTML = '';
+            
+            Object.entries(planets).forEach(([name, planet]) => {
+                const strengthClass = getStrengthClass(planet.strength);
+                const strengthPercent = Math.min((planet.strength / 10) * 100, 100);
+                
+                const indicator = `
+                    <div class="strength-indicator ${strengthClass}">
+                        <div class="strength-label">${name}</div>
+                        <div class="strength-score">${planet.strength.toFixed(1)}</div>
+                        <div class="strength-bar">
+                            <div class="strength-fill ${strengthClass}" style="width: ${strengthPercent}%"></div>
+                        </div>
+                        <div class="strength-details">
+                            ${planet.sign} • House ${planet.house} • ${planet.dignity}
+                            ${planet.retrograde ? ' • Retrograde' : ''}
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += indicator;
+            });
+        }
+        
+        function updateHouseStrengthIndicators(houses) {
+            const grid = document.getElementById('houseStrengthGrid');
+            grid.innerHTML = '';
+            
+            Object.entries(houses).forEach(([num, house]) => {
+                const strengthClass = getStrengthClass(house.strength);
+                const strengthPercent = Math.min((house.strength / 10) * 100, 100);
+                
+                const indicator = `
+                    <div class="strength-indicator ${strengthClass}">
+                        <div class="strength-label">House ${num}</div>
+                        <div class="strength-score">${house.strength.toFixed(1)}</div>
+                        <div class="strength-bar">
+                            <div class="strength-fill ${strengthClass}" style="width: ${strengthPercent}%"></div>
+                        </div>
+                        <div class="strength-details">
+                            ${house.sign} • ${house.element} • ${house.purpose}
+                            ${house.planets.length > 0 ? ` • ${house.planets.join(', ')}` : ' • Empty'}
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += indicator;
+            });
+        }
+        
+        function getStrengthClass(strength) {
+            if (strength >= 7) return 'strong';
+            if (strength >= 4) return 'moderate';
+            return 'weak';
+        }
     </script>
 </body>
 </html> 

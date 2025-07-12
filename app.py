@@ -46,7 +46,7 @@ def calculate_chart():
         chart = chart_calculator.calculate_chart(**birth_details)
         
         # Calculate dasha using new engine
-        moon_longitude = chart['planets']['Moon']['degree']
+        moon_longitude = chart['planets']['Moon']['longitude']
         dasha_info = get_dasha_info(
             moon_longitude=moon_longitude,
             birth_date=data['date']

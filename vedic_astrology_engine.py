@@ -100,9 +100,11 @@ def calculate_birth_nakshatra(moon_longitude: float) -> Dict[str, Any]:
     nakshatra_span = 360 / 27
     nakshatra_index = int(moon_longitude // nakshatra_span)
     lord = NAKSHATRA_LORDS[nakshatra_index]
+    nakshatra_name = NAKSHATRAS[nakshatra_index]
     progress = (moon_longitude % nakshatra_span) / nakshatra_span
     return {
         'index': nakshatra_index,
+        'nakshatra': nakshatra_name,
         'lord': lord,
         'progress': progress,
         'remaining': 1 - progress

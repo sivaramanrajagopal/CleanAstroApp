@@ -485,7 +485,8 @@ class VedicChartCalculator:
             formatted_planets[name] = {
                 'sign': planet['rasi'],
                 'house': planet['house'],
-                'degree': round(planet['longitude'], 2),
+                'longitude': round(planet['longitude'], 2),
+                'degree': round(planet['longitude'], 2),  # Keep both for compatibility
                 'strength': round(planet['strength'], 2),
                 'dignity': planet['dignity'],
                 'retrograde': planet['retrograde'],

@@ -1,0 +1,1447 @@
+{
+  "timestamp": "2025-07-13T10:50:22.584754",
+  "data": {
+    "chart": {
+      "lagna": {
+        "sign": "Rishaba",
+        "degree": 34.19
+      },
+      "planets": {
+        "Sun": {
+          "sign": "Kumbha",
+          "house": 10,
+          "longitude": 313.2,
+          "degree": 313.2,
+          "strength": 8.67,
+          "dignity": "neutral",
+          "retrograde": false,
+          "nakshatra": "Shatabhisha",
+          "pada": 2,
+          "shadbala": {
+            "sthana_bala": 0.75,
+            "dig_bala": 0.25,
+            "kala_bala": 0.7,
+            "cheshta_bala": 0.5,
+            "naisargika_bala": 2.0,
+            "drik_bala": 1.0,
+            "total_shadbala": 0.867,
+            "dignity": "neutral"
+          }
+        },
+        "Moon": {
+          "sign": "Dhanus",
+          "house": 8,
+          "longitude": 252.63,
+          "degree": 252.63,
+          "strength": 7.17,
+          "dignity": "neutral",
+          "retrograde": false,
+          "nakshatra": "Mula",
+          "pada": 4,
+          "shadbala": {
+            "sthana_bala": 0.5,
+            "dig_bala": 0.5,
+            "kala_bala": 0.8,
+            "cheshta_bala": 0.5,
+            "naisargika_bala": 1.5,
+            "drik_bala": 0.5,
+            "total_shadbala": 0.717,
+            "dignity": "neutral"
+          }
+        },
+        "Mercury": {
+          "sign": "Kumbha",
+          "house": 10,
+          "longitude": 303.75,
+          "degree": 303.75,
+          "strength": 6.67,
+          "dignity": "neutral",
+          "retrograde": false,
+          "nakshatra": "Dhanishta",
+          "pada": 4,
+          "shadbala": {
+            "sthana_bala": 0.75,
+            "dig_bala": 0.25,
+            "kala_bala": 0.75,
+            "cheshta_bala": 0.5,
+            "naisargika_bala": 0.75,
+            "drik_bala": 1.0,
+            "total_shadbala": 0.667,
+            "dignity": "neutral"
+          }
+        },
+        "Venus": {
+          "sign": "Makara",
+          "house": 9,
+          "longitude": 285.06,
+          "degree": 285.06,
+          "strength": 7.58,
+          "dignity": "neutral",
+          "retrograde": false,
+          "nakshatra": "Shravana",
+          "pada": 2,
+          "shadbala": {
+            "sthana_bala": 0.75,
+            "dig_bala": 0.5,
+            "kala_bala": 0.8,
+            "cheshta_bala": 0.5,
+            "naisargika_bala": 1.25,
+            "drik_bala": 0.75,
+            "total_shadbala": 0.758,
+            "dignity": "neutral"
+          }
+        },
+        "Mars": {
+          "sign": "Thula",
+          "house": 6,
+          "longitude": 206.97,
+          "degree": 206.97,
+          "strength": 5.5,
+          "dignity": "neutral",
+          "retrograde": false,
+          "nakshatra": "Vishakha",
+          "pada": 3,
+          "shadbala": {
+            "sthana_bala": 0.5,
+            "dig_bala": 0.5,
+            "kala_bala": 0.8,
+            "cheshta_bala": 0.5,
+            "naisargika_bala": 0.5,
+            "drik_bala": 0.5,
+            "total_shadbala": 0.55,
+            "dignity": "neutral"
+          }
+        },
+        "Jupiter": {
+          "sign": "Dhanus",
+          "house": 8,
+          "longitude": 253.6,
+          "degree": 253.6,
+          "strength": 6.58,
+          "dignity": "own",
+          "retrograde": false,
+          "nakshatra": "Purva Ashadha",
+          "pada": 1,
+          "shadbala": {
+            "sthana_bala": 0.75,
+            "dig_bala": 0.5,
+            "kala_bala": 0.7,
+            "cheshta_bala": 0.5,
+            "naisargika_bala": 1.0,
+            "drik_bala": 0.5,
+            "total_shadbala": 0.658,
+            "dignity": "own"
+          }
+        },
+        "Saturn": {
+          "sign": "Thula",
+          "house": 6,
+          "longitude": 202.75,
+          "degree": 202.75,
+          "strength": 6.58,
+          "dignity": "exalted",
+          "retrograde": true,
+          "nakshatra": "Vishakha",
+          "pada": 1,
+          "shadbala": {
+            "sthana_bala": 1.0,
+            "dig_bala": 0.5,
+            "kala_bala": 0.7,
+            "cheshta_bala": 1.0,
+            "naisargika_bala": 0.25,
+            "drik_bala": 0.5,
+            "total_shadbala": 0.658,
+            "dignity": "exalted"
+          }
+        },
+        "Rahu": {
+          "sign": "Rishaba",
+          "house": 1,
+          "longitude": 48.42,
+          "degree": 48.42,
+          "strength": 3.5,
+          "dignity": "neutral",
+          "retrograde": true,
+          "nakshatra": "Rohini",
+          "pada": 3,
+          "shadbala": {}
+        },
+        "Ketu": {
+          "sign": "Vrischika",
+          "house": 7,
+          "longitude": 228.42,
+          "degree": 228.42,
+          "strength": 3.5,
+          "dignity": "neutral",
+          "retrograde": true,
+          "nakshatra": "Jyeshtha",
+          "pada": 1,
+          "shadbala": {}
+        }
+      },
+      "houses": {
+        "1": {
+          "sign": "Rishaba",
+          "element": "Earth",
+          "gender": "Female",
+          "purpose": "Artha",
+          "mobility": "Fixed",
+          "planets": [
+            "Rahu"
+          ],
+          "strength": 7.29,
+          "kendra": false,
+          "trikona": false
+        },
+        "2": {
+          "sign": "Mithuna",
+          "element": "Air",
+          "gender": "Male",
+          "purpose": "Kama",
+          "mobility": "Dual",
+          "planets": [],
+          "strength": 3.33,
+          "kendra": false,
+          "trikona": false
+        },
+        "3": {
+          "sign": "Kataka",
+          "element": "Water",
+          "gender": "Female",
+          "purpose": "Moksha",
+          "mobility": "Movable",
+          "planets": [],
+          "strength": 3.58,
+          "kendra": true,
+          "trikona": false
+        },
+        "4": {
+          "sign": "Simha",
+          "element": "Fire",
+          "gender": "Male",
+          "purpose": "Dharma",
+          "mobility": "Fixed",
+          "planets": [],
+          "strength": 4.33,
+          "kendra": false,
+          "trikona": true
+        },
+        "5": {
+          "sign": "Kanni",
+          "element": "Earth",
+          "gender": "Female",
+          "purpose": "Artha",
+          "mobility": "Dual",
+          "planets": [],
+          "strength": 3.33,
+          "kendra": false,
+          "trikona": false
+        },
+        "6": {
+          "sign": "Thula",
+          "element": "Air",
+          "gender": "Male",
+          "purpose": "Kama",
+          "mobility": "Movable",
+          "planets": [
+            "Mars",
+            "Saturn"
+          ],
+          "strength": 15.87,
+          "kendra": true,
+          "trikona": false
+        },
+        "7": {
+          "sign": "Vrischika",
+          "element": "Water",
+          "gender": "Female",
+          "purpose": "Moksha",
+          "mobility": "Fixed",
+          "planets": [
+            "Ketu"
+          ],
+          "strength": 6.25,
+          "kendra": false,
+          "trikona": false
+        },
+        "8": {
+          "sign": "Dhanus",
+          "element": "Fire",
+          "gender": "Male",
+          "purpose": "Dharma",
+          "mobility": "Dual",
+          "planets": [
+            "Moon",
+            "Jupiter"
+          ],
+          "strength": 17.04,
+          "kendra": false,
+          "trikona": true
+        },
+        "9": {
+          "sign": "Makara",
+          "element": "Earth",
+          "gender": "Female",
+          "purpose": "Artha",
+          "mobility": "Movable",
+          "planets": [
+            "Venus"
+          ],
+          "strength": 10.87,
+          "kendra": true,
+          "trikona": false
+        },
+        "10": {
+          "sign": "Kumbha",
+          "element": "Air",
+          "gender": "Male",
+          "purpose": "Kama",
+          "mobility": "Fixed",
+          "planets": [
+            "Sun",
+            "Mercury"
+          ],
+          "strength": 18.63,
+          "kendra": false,
+          "trikona": false
+        },
+        "11": {
+          "sign": "Meena",
+          "element": "Water",
+          "gender": "Female",
+          "purpose": "Moksha",
+          "mobility": "Dual",
+          "planets": [],
+          "strength": 3.29,
+          "kendra": false,
+          "trikona": false
+        },
+        "12": {
+          "sign": "Mesha",
+          "element": "Fire",
+          "gender": "Male",
+          "purpose": "Dharma",
+          "mobility": "Movable",
+          "planets": [],
+          "strength": 2.75,
+          "kendra": true,
+          "trikona": true
+        }
+      },
+      "aspects": {
+        "Sun": [
+          4
+        ],
+        "Moon": [
+          2
+        ],
+        "Mercury": [
+          4
+        ],
+        "Venus": [
+          3
+        ],
+        "Mars": [
+          1,
+          9,
+          12
+        ],
+        "Jupiter": [
+          2,
+          4,
+          12
+        ],
+        "Saturn": [
+          3,
+          8,
+          12
+        ],
+        "Rahu": [
+          5,
+          7,
+          9
+        ],
+        "Ketu": [
+          1,
+          3,
+          11
+        ]
+      },
+      "yogas": {
+        "Gajakesari": true,
+        "Budhaditya": true,
+        "Chandra_Mangal": false,
+        "Dhana": false,
+        "Raja": true,
+        "Kuja_Dosha": false,
+        "Mahapurusha": true
+      },
+      "birth_info": {
+        "date": "1984-02-26",
+        "time": "11:30",
+        "latitude": 10.0603,
+        "longitude": 76.6352,
+        "timezone": 5.5,
+        "ayanamsa": 23.63573
+      }
+    },
+    "dasha": {
+      "birth_nakshatra": {
+        "index": 18,
+        "nakshatra": "Mula",
+        "lord": "Ketu",
+        "progress": 0.9472499999999988,
+        "remaining": 0.052750000000001185
+      },
+      "mahadasha_periods": [
+        {
+          "dasha": "Ketu",
+          "start_date": "1984-02-26",
+          "end_date": "1984-07-09",
+          "years": 0.37
+        },
+        {
+          "dasha": "Venus",
+          "start_date": "1984-07-09",
+          "end_date": "2004-07-09",
+          "years": 20
+        },
+        {
+          "dasha": "Sun",
+          "start_date": "2004-07-09",
+          "end_date": "2010-07-09",
+          "years": 6
+        },
+        {
+          "dasha": "Moon",
+          "start_date": "2010-07-09",
+          "end_date": "2020-07-08",
+          "years": 10
+        },
+        {
+          "dasha": "Mars",
+          "start_date": "2020-07-08",
+          "end_date": "2027-07-08",
+          "years": 7
+        },
+        {
+          "dasha": "Rahu",
+          "start_date": "2027-07-08",
+          "end_date": "2045-07-07",
+          "years": 18
+        },
+        {
+          "dasha": "Jupiter",
+          "start_date": "2045-07-07",
+          "end_date": "2061-07-07",
+          "years": 16
+        },
+        {
+          "dasha": "Saturn",
+          "start_date": "2061-07-07",
+          "end_date": "2080-07-06",
+          "years": 19
+        },
+        {
+          "dasha": "Mercury",
+          "start_date": "2080-07-06",
+          "end_date": "2097-07-06",
+          "years": 17
+        }
+      ],
+      "current_mahadasha": {
+        "dasha": "Mars",
+        "start_date": "2020-07-08",
+        "end_date": "2027-07-08",
+        "years": 7
+      },
+      "antardasha_periods": [
+        {
+          "dasha": "Mars",
+          "start_date": "2020-07-08",
+          "end_date": "2020-12-04",
+          "years": 0.41
+        },
+        {
+          "dasha": "Rahu",
+          "start_date": "2020-12-04",
+          "end_date": "2021-12-22",
+          "years": 1.05
+        },
+        {
+          "dasha": "Jupiter",
+          "start_date": "2021-12-22",
+          "end_date": "2022-11-27",
+          "years": 0.93
+        },
+        {
+          "dasha": "Saturn",
+          "start_date": "2022-11-27",
+          "end_date": "2024-01-05",
+          "years": 1.11
+        },
+        {
+          "dasha": "Mercury",
+          "start_date": "2024-01-05",
+          "end_date": "2025-01-01",
+          "years": 0.99
+        },
+        {
+          "dasha": "Ketu",
+          "start_date": "2025-01-01",
+          "end_date": "2025-05-30",
+          "years": 0.41
+        },
+        {
+          "dasha": "Venus",
+          "start_date": "2025-05-30",
+          "end_date": "2026-07-30",
+          "years": 1.17
+        },
+        {
+          "dasha": "Sun",
+          "start_date": "2026-07-30",
+          "end_date": "2026-12-04",
+          "years": 0.35
+        },
+        {
+          "dasha": "Moon",
+          "start_date": "2026-12-04",
+          "end_date": "2027-07-05",
+          "years": 0.58
+        }
+      ],
+      "current_antardasha": {
+        "dasha": "Venus",
+        "start_date": "2025-05-30",
+        "end_date": "2026-07-30",
+        "years": 1.17
+      },
+      "current_antardasha_list": [
+        {
+          "dasha": "Mars",
+          "start_date": "2020-07-08",
+          "end_date": "2020-12-04",
+          "years": 0.41
+        },
+        {
+          "dasha": "Rahu",
+          "start_date": "2020-12-04",
+          "end_date": "2021-12-22",
+          "years": 1.05
+        },
+        {
+          "dasha": "Jupiter",
+          "start_date": "2021-12-22",
+          "end_date": "2022-11-27",
+          "years": 0.93
+        },
+        {
+          "dasha": "Saturn",
+          "start_date": "2022-11-27",
+          "end_date": "2024-01-05",
+          "years": 1.11
+        },
+        {
+          "dasha": "Mercury",
+          "start_date": "2024-01-05",
+          "end_date": "2025-01-01",
+          "years": 0.99
+        },
+        {
+          "dasha": "Ketu",
+          "start_date": "2025-01-01",
+          "end_date": "2025-05-30",
+          "years": 0.41
+        },
+        {
+          "dasha": "Venus",
+          "start_date": "2025-05-30",
+          "end_date": "2026-07-30",
+          "years": 1.17
+        },
+        {
+          "dasha": "Sun",
+          "start_date": "2026-07-30",
+          "end_date": "2026-12-04",
+          "years": 0.35
+        },
+        {
+          "dasha": "Moon",
+          "start_date": "2026-12-04",
+          "end_date": "2027-07-05",
+          "years": 0.58
+        }
+      ]
+    },
+    "transits": {
+      "birth_chart": {
+        "lagna": {
+          "sign": "Rishaba",
+          "degree": 34.19
+        },
+        "planets": {
+          "Sun": {
+            "sign": "Kumbha",
+            "house": 10,
+            "longitude": 313.2,
+            "degree": 313.2,
+            "strength": 8.67,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Shatabhisha",
+            "pada": 2,
+            "shadbala": {
+              "sthana_bala": 0.75,
+              "dig_bala": 0.25,
+              "kala_bala": 0.7,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 2.0,
+              "drik_bala": 1.0,
+              "total_shadbala": 0.867,
+              "dignity": "neutral"
+            }
+          },
+          "Moon": {
+            "sign": "Dhanus",
+            "house": 8,
+            "longitude": 252.63,
+            "degree": 252.63,
+            "strength": 7.17,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Mula",
+            "pada": 4,
+            "shadbala": {
+              "sthana_bala": 0.5,
+              "dig_bala": 0.5,
+              "kala_bala": 0.8,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 1.5,
+              "drik_bala": 0.5,
+              "total_shadbala": 0.717,
+              "dignity": "neutral"
+            }
+          },
+          "Mercury": {
+            "sign": "Kumbha",
+            "house": 10,
+            "longitude": 303.75,
+            "degree": 303.75,
+            "strength": 6.67,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Dhanishta",
+            "pada": 4,
+            "shadbala": {
+              "sthana_bala": 0.75,
+              "dig_bala": 0.25,
+              "kala_bala": 0.75,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 0.75,
+              "drik_bala": 1.0,
+              "total_shadbala": 0.667,
+              "dignity": "neutral"
+            }
+          },
+          "Venus": {
+            "sign": "Makara",
+            "house": 9,
+            "longitude": 285.06,
+            "degree": 285.06,
+            "strength": 7.58,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Shravana",
+            "pada": 2,
+            "shadbala": {
+              "sthana_bala": 0.75,
+              "dig_bala": 0.5,
+              "kala_bala": 0.8,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 1.25,
+              "drik_bala": 0.75,
+              "total_shadbala": 0.758,
+              "dignity": "neutral"
+            }
+          },
+          "Mars": {
+            "sign": "Thula",
+            "house": 6,
+            "longitude": 206.97,
+            "degree": 206.97,
+            "strength": 5.5,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Vishakha",
+            "pada": 3,
+            "shadbala": {
+              "sthana_bala": 0.5,
+              "dig_bala": 0.5,
+              "kala_bala": 0.8,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 0.5,
+              "drik_bala": 0.5,
+              "total_shadbala": 0.55,
+              "dignity": "neutral"
+            }
+          },
+          "Jupiter": {
+            "sign": "Dhanus",
+            "house": 8,
+            "longitude": 253.6,
+            "degree": 253.6,
+            "strength": 6.58,
+            "dignity": "own",
+            "retrograde": false,
+            "nakshatra": "Purva Ashadha",
+            "pada": 1,
+            "shadbala": {
+              "sthana_bala": 0.75,
+              "dig_bala": 0.5,
+              "kala_bala": 0.7,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 1.0,
+              "drik_bala": 0.5,
+              "total_shadbala": 0.658,
+              "dignity": "own"
+            }
+          },
+          "Saturn": {
+            "sign": "Thula",
+            "house": 6,
+            "longitude": 202.75,
+            "degree": 202.75,
+            "strength": 6.58,
+            "dignity": "exalted",
+            "retrograde": true,
+            "nakshatra": "Vishakha",
+            "pada": 1,
+            "shadbala": {
+              "sthana_bala": 1.0,
+              "dig_bala": 0.5,
+              "kala_bala": 0.7,
+              "cheshta_bala": 1.0,
+              "naisargika_bala": 0.25,
+              "drik_bala": 0.5,
+              "total_shadbala": 0.658,
+              "dignity": "exalted"
+            }
+          },
+          "Rahu": {
+            "sign": "Rishaba",
+            "house": 1,
+            "longitude": 48.42,
+            "degree": 48.42,
+            "strength": 3.5,
+            "dignity": "neutral",
+            "retrograde": true,
+            "nakshatra": "Rohini",
+            "pada": 3,
+            "shadbala": {}
+          },
+          "Ketu": {
+            "sign": "Vrischika",
+            "house": 7,
+            "longitude": 228.42,
+            "degree": 228.42,
+            "strength": 3.5,
+            "dignity": "neutral",
+            "retrograde": true,
+            "nakshatra": "Jyeshtha",
+            "pada": 1,
+            "shadbala": {}
+          }
+        },
+        "houses": {
+          "1": {
+            "sign": "Rishaba",
+            "element": "Earth",
+            "gender": "Female",
+            "purpose": "Artha",
+            "mobility": "Fixed",
+            "planets": [
+              "Rahu"
+            ],
+            "strength": 7.29,
+            "kendra": false,
+            "trikona": false
+          },
+          "2": {
+            "sign": "Mithuna",
+            "element": "Air",
+            "gender": "Male",
+            "purpose": "Kama",
+            "mobility": "Dual",
+            "planets": [],
+            "strength": 3.33,
+            "kendra": false,
+            "trikona": false
+          },
+          "3": {
+            "sign": "Kataka",
+            "element": "Water",
+            "gender": "Female",
+            "purpose": "Moksha",
+            "mobility": "Movable",
+            "planets": [],
+            "strength": 3.58,
+            "kendra": true,
+            "trikona": false
+          },
+          "4": {
+            "sign": "Simha",
+            "element": "Fire",
+            "gender": "Male",
+            "purpose": "Dharma",
+            "mobility": "Fixed",
+            "planets": [],
+            "strength": 4.33,
+            "kendra": false,
+            "trikona": true
+          },
+          "5": {
+            "sign": "Kanni",
+            "element": "Earth",
+            "gender": "Female",
+            "purpose": "Artha",
+            "mobility": "Dual",
+            "planets": [],
+            "strength": 3.33,
+            "kendra": false,
+            "trikona": false
+          },
+          "6": {
+            "sign": "Thula",
+            "element": "Air",
+            "gender": "Male",
+            "purpose": "Kama",
+            "mobility": "Movable",
+            "planets": [
+              "Mars",
+              "Saturn"
+            ],
+            "strength": 15.87,
+            "kendra": true,
+            "trikona": false
+          },
+          "7": {
+            "sign": "Vrischika",
+            "element": "Water",
+            "gender": "Female",
+            "purpose": "Moksha",
+            "mobility": "Fixed",
+            "planets": [
+              "Ketu"
+            ],
+            "strength": 6.25,
+            "kendra": false,
+            "trikona": false
+          },
+          "8": {
+            "sign": "Dhanus",
+            "element": "Fire",
+            "gender": "Male",
+            "purpose": "Dharma",
+            "mobility": "Dual",
+            "planets": [
+              "Moon",
+              "Jupiter"
+            ],
+            "strength": 17.04,
+            "kendra": false,
+            "trikona": true
+          },
+          "9": {
+            "sign": "Makara",
+            "element": "Earth",
+            "gender": "Female",
+            "purpose": "Artha",
+            "mobility": "Movable",
+            "planets": [
+              "Venus"
+            ],
+            "strength": 10.87,
+            "kendra": true,
+            "trikona": false
+          },
+          "10": {
+            "sign": "Kumbha",
+            "element": "Air",
+            "gender": "Male",
+            "purpose": "Kama",
+            "mobility": "Fixed",
+            "planets": [
+              "Sun",
+              "Mercury"
+            ],
+            "strength": 18.63,
+            "kendra": false,
+            "trikona": false
+          },
+          "11": {
+            "sign": "Meena",
+            "element": "Water",
+            "gender": "Female",
+            "purpose": "Moksha",
+            "mobility": "Dual",
+            "planets": [],
+            "strength": 3.29,
+            "kendra": false,
+            "trikona": false
+          },
+          "12": {
+            "sign": "Mesha",
+            "element": "Fire",
+            "gender": "Male",
+            "purpose": "Dharma",
+            "mobility": "Movable",
+            "planets": [],
+            "strength": 2.75,
+            "kendra": true,
+            "trikona": true
+          }
+        },
+        "aspects": {
+          "Sun": [
+            4
+          ],
+          "Moon": [
+            2
+          ],
+          "Mercury": [
+            4
+          ],
+          "Venus": [
+            3
+          ],
+          "Mars": [
+            1,
+            9,
+            12
+          ],
+          "Jupiter": [
+            2,
+            4,
+            12
+          ],
+          "Saturn": [
+            3,
+            8,
+            12
+          ],
+          "Rahu": [
+            5,
+            7,
+            9
+          ],
+          "Ketu": [
+            1,
+            3,
+            11
+          ]
+        },
+        "yogas": {
+          "Gajakesari": true,
+          "Budhaditya": true,
+          "Chandra_Mangal": false,
+          "Dhana": false,
+          "Raja": true,
+          "Kuja_Dosha": false,
+          "Mahapurusha": true
+        },
+        "birth_info": {
+          "date": "1984-02-26",
+          "time": "11:30",
+          "latitude": 10.0603,
+          "longitude": 76.6352,
+          "timezone": 5.5,
+          "ayanamsa": 23.63573
+        }
+      },
+      "transit_chart": {
+        "lagna": {
+          "sign": "Kanni",
+          "degree": 171.46
+        },
+        "planets": {
+          "Sun": {
+            "sign": "Mithuna",
+            "house": 10,
+            "longitude": 86.92,
+            "degree": 86.92,
+            "strength": 8.83,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Punarvasu",
+            "pada": 3,
+            "shadbala": {
+              "sthana_bala": 0.75,
+              "dig_bala": 0.25,
+              "kala_bala": 0.8,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 2.0,
+              "drik_bala": 1.0,
+              "total_shadbala": 0.883,
+              "dignity": "neutral"
+            }
+          },
+          "Moon": {
+            "sign": "Makara",
+            "house": 5,
+            "longitude": 296.17,
+            "degree": 296.17,
+            "strength": 8.25,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Dhanishta",
+            "pada": 1,
+            "shadbala": {
+              "sthana_bala": 0.75,
+              "dig_bala": 0.75,
+              "kala_bala": 0.7,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 1.5,
+              "drik_bala": 0.75,
+              "total_shadbala": 0.825,
+              "dignity": "neutral"
+            }
+          },
+          "Mercury": {
+            "sign": "Kataka",
+            "house": 11,
+            "longitude": 110.4,
+            "degree": 110.4,
+            "strength": 5.42,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Ashlesha",
+            "pada": 2,
+            "shadbala": {
+              "sthana_bala": 0.5,
+              "dig_bala": 0.25,
+              "kala_bala": 0.75,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 0.75,
+              "drik_bala": 0.5,
+              "total_shadbala": 0.542,
+              "dignity": "neutral"
+            }
+          },
+          "Venus": {
+            "sign": "Rishaba",
+            "house": 9,
+            "longitude": 45.38,
+            "degree": 45.38,
+            "strength": 7.83,
+            "dignity": "own",
+            "retrograde": false,
+            "nakshatra": "Rohini",
+            "pada": 2,
+            "shadbala": {
+              "sthana_bala": 1.0,
+              "dig_bala": 0.5,
+              "kala_bala": 0.7,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 1.25,
+              "drik_bala": 0.75,
+              "total_shadbala": 0.783,
+              "dignity": "own"
+            }
+          },
+          "Mars": {
+            "sign": "Simha",
+            "house": 12,
+            "longitude": 140.75,
+            "degree": 140.75,
+            "strength": 5.33,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Purva Phalguni",
+            "pada": 3,
+            "shadbala": {
+              "sthana_bala": 0.5,
+              "dig_bala": 0.5,
+              "kala_bala": 0.7,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 0.5,
+              "drik_bala": 0.5,
+              "total_shadbala": 0.533,
+              "dignity": "neutral"
+            }
+          },
+          "Jupiter": {
+            "sign": "Mithuna",
+            "house": 10,
+            "longitude": 73.38,
+            "degree": 73.38,
+            "strength": 7.17,
+            "dignity": "neutral",
+            "retrograde": false,
+            "nakshatra": "Ardra",
+            "pada": 3,
+            "shadbala": {
+              "sthana_bala": 0.75,
+              "dig_bala": 0.25,
+              "kala_bala": 0.8,
+              "cheshta_bala": 0.5,
+              "naisargika_bala": 1.0,
+              "drik_bala": 1.0,
+              "total_shadbala": 0.717,
+              "dignity": "neutral"
+            }
+          },
+          "Saturn": {
+            "sign": "Meena",
+            "house": 7,
+            "longitude": 337.72,
+            "degree": 337.72,
+            "strength": 7.17,
+            "dignity": "neutral",
+            "retrograde": true,
+            "nakshatra": "Uttara Bhadrapada",
+            "pada": 2,
+            "shadbala": {
+              "sthana_bala": 0.75,
+              "dig_bala": 0.5,
+              "kala_bala": 0.8,
+              "cheshta_bala": 1.0,
+              "naisargika_bala": 0.25,
+              "drik_bala": 1.0,
+              "total_shadbala": 0.717,
+              "dignity": "neutral"
+            }
+          },
+          "Rahu": {
+            "sign": "Kumbha",
+            "house": 6,
+            "longitude": 325.62,
+            "degree": 325.62,
+            "strength": 3.5,
+            "dignity": "neutral",
+            "retrograde": true,
+            "nakshatra": "Purva Bhadrapada",
+            "pada": 2,
+            "shadbala": {}
+          },
+          "Ketu": {
+            "sign": "Simha",
+            "house": 12,
+            "longitude": 145.62,
+            "degree": 145.62,
+            "strength": 3.5,
+            "dignity": "neutral",
+            "retrograde": true,
+            "nakshatra": "Purva Phalguni",
+            "pada": 4,
+            "shadbala": {}
+          }
+        },
+        "houses": {
+          "1": {
+            "sign": "Kanni",
+            "element": "Earth",
+            "gender": "Female",
+            "purpose": "Artha",
+            "mobility": "Dual",
+            "planets": [],
+            "strength": 2.71,
+            "kendra": false,
+            "trikona": false
+          },
+          "2": {
+            "sign": "Thula",
+            "element": "Air",
+            "gender": "Male",
+            "purpose": "Kama",
+            "mobility": "Movable",
+            "planets": [],
+            "strength": 3.92,
+            "kendra": true,
+            "trikona": false
+          },
+          "3": {
+            "sign": "Vrischika",
+            "element": "Water",
+            "gender": "Female",
+            "purpose": "Moksha",
+            "mobility": "Fixed",
+            "planets": [],
+            "strength": 2.67,
+            "kendra": false,
+            "trikona": false
+          },
+          "4": {
+            "sign": "Dhanus",
+            "element": "Fire",
+            "gender": "Male",
+            "purpose": "Dharma",
+            "mobility": "Dual",
+            "planets": [],
+            "strength": 3.58,
+            "kendra": false,
+            "trikona": true
+          },
+          "5": {
+            "sign": "Makara",
+            "element": "Earth",
+            "gender": "Female",
+            "purpose": "Artha",
+            "mobility": "Movable",
+            "planets": [
+              "Moon"
+            ],
+            "strength": 11.84,
+            "kendra": true,
+            "trikona": false
+          },
+          "6": {
+            "sign": "Kumbha",
+            "element": "Air",
+            "gender": "Male",
+            "purpose": "Kama",
+            "mobility": "Fixed",
+            "planets": [
+              "Rahu"
+            ],
+            "strength": 7.08,
+            "kendra": false,
+            "trikona": false
+          },
+          "7": {
+            "sign": "Meena",
+            "element": "Water",
+            "gender": "Female",
+            "purpose": "Moksha",
+            "mobility": "Dual",
+            "planets": [
+              "Saturn"
+            ],
+            "strength": 10.75,
+            "kendra": false,
+            "trikona": false
+          },
+          "8": {
+            "sign": "Mesha",
+            "element": "Fire",
+            "gender": "Male",
+            "purpose": "Dharma",
+            "mobility": "Movable",
+            "planets": [],
+            "strength": 2.67,
+            "kendra": true,
+            "trikona": true
+          },
+          "9": {
+            "sign": "Rishaba",
+            "element": "Earth",
+            "gender": "Female",
+            "purpose": "Artha",
+            "mobility": "Fixed",
+            "planets": [
+              "Venus"
+            ],
+            "strength": 11.75,
+            "kendra": false,
+            "trikona": false
+          },
+          "10": {
+            "sign": "Mithuna",
+            "element": "Air",
+            "gender": "Male",
+            "purpose": "Kama",
+            "mobility": "Dual",
+            "planets": [
+              "Sun",
+              "Jupiter"
+            ],
+            "strength": 18.71,
+            "kendra": false,
+            "trikona": false
+          },
+          "11": {
+            "sign": "Kataka",
+            "element": "Water",
+            "gender": "Female",
+            "purpose": "Moksha",
+            "mobility": "Movable",
+            "planets": [
+              "Mercury"
+            ],
+            "strength": 9.54,
+            "kendra": true,
+            "trikona": false
+          },
+          "12": {
+            "sign": "Simha",
+            "element": "Fire",
+            "gender": "Male",
+            "purpose": "Dharma",
+            "mobility": "Fixed",
+            "planets": [
+              "Mars",
+              "Ketu"
+            ],
+            "strength": 13.25,
+            "kendra": false,
+            "trikona": true
+          }
+        },
+        "aspects": {
+          "Sun": [
+            4
+          ],
+          "Moon": [
+            11
+          ],
+          "Mercury": [
+            5
+          ],
+          "Venus": [
+            3
+          ],
+          "Mars": [
+            3,
+            6,
+            7
+          ],
+          "Jupiter": [
+            2,
+            4,
+            6
+          ],
+          "Saturn": [
+            1,
+            4,
+            9
+          ],
+          "Rahu": [
+            2,
+            10,
+            12
+          ],
+          "Ketu": [
+            4,
+            6,
+            8
+          ]
+        },
+        "yogas": {
+          "Gajakesari": false,
+          "Budhaditya": false,
+          "Chandra_Mangal": false,
+          "Dhana": true,
+          "Raja": true,
+          "Kuja_Dosha": true,
+          "Mahapurusha": false
+        },
+        "birth_info": {
+          "date": "2025-07-13",
+          "time": "12:00",
+          "latitude": 10.0603,
+          "longitude": 76.6352,
+          "timezone": 5.5,
+          "ayanamsa": 24.213735
+        }
+      },
+      "transit_analysis": {
+        "Sun": {
+          "birth_house": 10,
+          "transit_sign": "Mithuna",
+          "transit_house": 2,
+          "effects": {
+            "strength": "neutral",
+            "impact": "moderate",
+            "areas_affected": [
+              "Leadership, authority, father, government"
+            ],
+            "remedies": []
+          }
+        },
+        "Moon": {
+          "birth_house": 8,
+          "transit_sign": "Makara",
+          "transit_house": 9,
+          "effects": {
+            "strength": "moderate",
+            "impact": "medium",
+            "areas_affected": [
+              "Trikona transit - spiritual growth",
+              "Mind, emotions, mother, home"
+            ],
+            "remedies": []
+          }
+        },
+        "Mars": {
+          "birth_house": 6,
+          "transit_sign": "Simha",
+          "transit_house": 4,
+          "effects": {
+            "strength": "strong",
+            "impact": "high",
+            "areas_affected": [
+              "Kendra transit - major life changes",
+              "Energy, courage, siblings, property"
+            ],
+            "remedies": []
+          }
+        },
+        "Mercury": {
+          "birth_house": 10,
+          "transit_sign": "Kataka",
+          "transit_house": 3,
+          "effects": {
+            "strength": "neutral",
+            "impact": "moderate",
+            "areas_affected": [
+              "Communication, business, education"
+            ],
+            "remedies": []
+          }
+        },
+        "Jupiter": {
+          "birth_house": 8,
+          "transit_sign": "Mithuna",
+          "transit_house": 2,
+          "effects": {
+            "strength": "neutral",
+            "impact": "moderate",
+            "areas_affected": [
+              "Wisdom, children, guru, spirituality"
+            ],
+            "remedies": []
+          }
+        },
+        "Venus": {
+          "birth_house": 9,
+          "transit_sign": "Rishaba",
+          "transit_house": 1,
+          "effects": {
+            "strength": "moderate",
+            "impact": "medium",
+            "areas_affected": [
+              "Kendra transit - major life changes",
+              "Trikona transit - spiritual growth",
+              "Relationships, luxury, arts, spouse"
+            ],
+            "remedies": []
+          }
+        },
+        "Saturn": {
+          "birth_house": 6,
+          "transit_sign": "Meena",
+          "transit_house": 11,
+          "effects": {
+            "strength": "neutral",
+            "impact": "moderate",
+            "areas_affected": [
+              "Discipline, career, obstacles, karma"
+            ],
+            "remedies": []
+          }
+        }
+      },
+      "transit_date": "2025-07-13"
+    }
+  }
+}

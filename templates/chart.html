@@ -202,6 +202,7 @@
                     <a class="nav-link" href="/transits">Transits</a>
                     <a class="nav-link" href="/compatibility">Compatibility</a>
                     <a class="nav-link" href="/shadbala">Shadbala</a>
+                    <a class="nav-link" href="/cosmic_connections">Cosmic Connections</a>
                 </div>
             </div>
         </nav>
@@ -241,9 +242,15 @@
                             <button type="submit" class="btn btn-custom w-100 mb-2">
                                 <i class="fas fa-calculator"></i> Calculate Chart
                             </button>
-                            <button type="button" class="btn btn-secondary w-100" id="clearCacheBtn">
+                            <button type="button" class="btn btn-secondary w-100 mb-2" id="clearCacheBtn">
                                 <i class="fas fa-eraser"></i> Clear Details
                             </button>
+                            <button type="button" class="btn btn-info w-100" id="generatePdfBtn" style="display: none;">
+                                <i class="fas fa-file-pdf"></i> Download PDF Report
+                            </button>
+                            <div id="cacheIndicator" class="alert alert-info mt-2" style="display: none;">
+                                <i class="fas fa-info-circle"></i> <span id="cacheMessage"></span>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -490,6 +497,25 @@
                 
                 if (data.success) {
                     displayResults(data.chart);
+                    
+                    // Show cache indicator if data was cached
+                    if (data.cached) {
+                        document.getElementById('cacheIndicator').style.display = 'block';
+                        document.getElementById('cacheMessage').textContent = 'Results loaded from cache for faster response.';
+                    } else {
+                        document.getElementById('cacheIndicator').style.display = 'block';
+                        document.getElementById('cacheMessage').textContent = 'Results calculated and cached for future use.';
+                        setTimeout(() => {
+                            document.getElementById('cacheIndicator').style.display = 'none';
+                        }, 3000);
+                    }
+                    
+                    // Show PDF button
+                    document.getElementById('generatePdfBtn').style.display = 'block';
+                    
+                    // Store chart data for PDF generation
+                    window.currentChartData = data.chart;
+                    window.currentFormData = formData;
                 } else {
                     alert('Error: ' + data.error);
                 }
@@ -740,6 +766,49 @@
             if (strength >= 4) return 'moderate';
             return 'weak';
         }
+        
+        // PDF Generation
+        document.getElementById('generatePdfBtn').addEventListener('click', async function() {
+            if (!window.currentChartData || !window.currentFormData) {
+                alert('Please calculate a chart first.');
+                return;
+            }
+            
+            const button = this;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+            button.disabled = true;
+            
+            try {
+                const pdfData = {
+                    ...window.currentFormData,
+                    name: 'Birth Chart Analysis',
+                    place: 'Birth Location'
+                };
+                
+                const response = await fetch('/api/generate_chart_pdf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(pdfData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Download the PDF
+                    window.open(data.download_url, '_blank');
+                } else {
+                    alert('Error generating PDF: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error generating PDF: ' + error.message);
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        });
     </script>
 
     <!-- Chart Strength Calculation Details -->

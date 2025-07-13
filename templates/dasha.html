@@ -51,6 +51,7 @@
                     <a class="nav-link" href="/transits">Transits</a>
                     <a class="nav-link" href="/compatibility">Compatibility</a>
                     <a class="nav-link" href="/shadbala">Shadbala</a>
+                    <a class="nav-link" href="/cosmic_connections">Cosmic Connections</a>
                 </div>
             </div>
         </nav>
@@ -86,9 +87,15 @@
                             <button type="submit" class="btn btn-custom w-100 mb-2">
                                 <i class="fas fa-clock"></i> Get Dasha
                             </button>
-                            <button type="button" class="btn btn-secondary w-100" id="clearCacheBtn">
+                            <button type="button" class="btn btn-secondary w-100 mb-2" id="clearCacheBtn">
                                 <i class="fas fa-eraser"></i> Clear Details
                             </button>
+                            <button type="button" class="btn btn-info w-100" id="generatePdfBtn" style="display: none;">
+                                <i class="fas fa-file-pdf"></i> Download PDF Report
+                            </button>
+                            <div id="cacheIndicator" class="alert alert-info mt-2" style="display: none;">
+                                <i class="fas fa-info-circle"></i> <span id="cacheMessage"></span>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -193,6 +200,25 @@
                 const data = await response.json();
                 if (data.success) {
                     displayDasha(data.dasha);
+                    
+                    // Show cache indicator if data was cached
+                    if (data.cached) {
+                        document.getElementById('cacheIndicator').style.display = 'block';
+                        document.getElementById('cacheMessage').textContent = 'Results loaded from cache for faster response.';
+                    } else {
+                        document.getElementById('cacheIndicator').style.display = 'block';
+                        document.getElementById('cacheMessage').textContent = 'Results calculated and cached for future use.';
+                        setTimeout(() => {
+                            document.getElementById('cacheIndicator').style.display = 'none';
+                        }, 3000);
+                    }
+                    
+                    // Show PDF button
+                    document.getElementById('generatePdfBtn').style.display = 'block';
+                    
+                    // Store dasha data for PDF generation
+                    window.currentDashaData = data.dasha;
+                    window.currentFormData = formData;
                 } else {
                     alert('Error: ' + data.error);
                 }
@@ -252,6 +278,48 @@
                 antardashaTable.innerHTML = '<tr><td colspan="4" class="text-muted">No Bhukti (Antardasha) periods found.</td></tr>';
             }
         }
+        
+        // PDF Generation
+        document.getElementById('generatePdfBtn').addEventListener('click', async function() {
+            if (!window.currentDashaData || !window.currentFormData) {
+                alert('Please calculate dasha first.');
+                return;
+            }
+            
+            const button = this;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+            button.disabled = true;
+            
+            try {
+                const pdfData = {
+                    ...window.currentFormData,
+                    name: 'Dasha Analysis'
+                };
+                
+                const response = await fetch('/api/generate_dasha_pdf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(pdfData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Download the PDF
+                    window.open(data.download_url, '_blank');
+                } else {
+                    alert('Error generating PDF: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error generating PDF: ' + error.message);
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        });
     </script>
 </body>
 </html> 

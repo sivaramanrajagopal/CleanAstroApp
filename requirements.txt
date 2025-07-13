@@ -1,2 +1,4 @@
 Flask==2.3.3
 pyswisseph==2.10.3.2
+reportlab==4.0.4
+requests==2.31.0
